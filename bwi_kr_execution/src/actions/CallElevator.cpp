@@ -203,9 +203,12 @@ void CallElevator::run() {
         ac.cancelAllGoals();
         if(randSpeech)
         {
-          CallGUI thanks("thanks", CallGUI::DISPLAY,  "Thanks! Would you mind helping me inside the elevator as well?");
-          thanks.run();
+          speak_srv.request.message = "Thanks! Would you mind helping me inside the elevator as well?";
+          speak_message_client.call(speak_srv);
         }
+        
+        CallGUI thanks("thanks", CallGUI::DISPLAY,  "Thanks! Would you mind helping me inside the elevator as well?");
+        thanks.run();
       } else {
         // A door didn't open in the timeout specified.
         failed = true;
